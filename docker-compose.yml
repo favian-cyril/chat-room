@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: chatapp
+
+  backend:
+    build:
+      context: .
+      dockerfile: vouch_test_chatroom_be/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+  
+  frontend:
+    build:
+      context: .
+      dockerfile: vouch_test_chatroom_fe/Dockerfile
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
