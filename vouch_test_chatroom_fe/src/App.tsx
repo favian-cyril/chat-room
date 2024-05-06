@@ -26,23 +26,24 @@ const App = () => {
   }, [roomID])
   useEffect(() => {
     // Establish a Socket.io connection with the server
-    const newSocket = io(import.meta.env.VITE_BACKEND_URL); // Replace with your server URL
-
-    // Emit a 'joinRoom' event to the server with username and roomID
-    newSocket.emit('joinRoom', { username, roomID });
-
-    // Set up event listener for receiving chat messages from the server
-    newSocket.on('message', (newMessage: Message) => {
-      setMessages([...messages, newMessage]);
-    });
-
-    // Store the socket in the state to access it in other functions
-    setSocket(newSocket);
-
-    // Clean up the socket connection when the component unmounts
-    return () => {
-      newSocket.disconnect();
-    };
+    if (username && roomID) {
+      const newSocket = io(import.meta.env.VITE_BACKEND_URL); // Replace with your server URL
+  
+      // Emit a 'joinRoom' event to the server with username and roomID
+      newSocket.emit('joinRoom', { username, roomID });
+  
+      // Set up event listener for receiving chat messages from the server
+      newSocket.on('message', (newMessage: Message) => {
+        setMessages([...messages, newMessage]);
+      });
+  
+      // Store the socket in the state to access it in other functions
+      setSocket(newSocket);
+      // Clean up the socket connection when the component unmounts
+      return () => {
+        newSocket.disconnect();
+      };
+    }
   }, [messages, roomID, username]);
 
   const handleMessageSubmit = () => {
