@@ -11,6 +11,7 @@ const io = socketio(server,
   {
     cors: {
       // origin: '*', // Use wildcard only for development or it will get CORS error
+      origin: process.env.ORIGIN,
       methods: ['GET', 'POST'],
     },
 });
