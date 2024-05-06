@@ -2,10 +2,9 @@ FROM node:18
 
 WORKDIR /app
 
-COPY vouch_test_chatroom_be/package*.json ./
+COPY package*.json ./
 RUN yarn install
 
-COPY vouch_test_chatroom_be/src /app
-EXPOSE 3000
+COPY ./src /app
 
 CMD ["node", "app.js"]

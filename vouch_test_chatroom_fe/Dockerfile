@@ -2,10 +2,9 @@ FROM node:18
 
 WORKDIR /app
 
-COPY vouch_test_chatroom_fe/package*.json ./
+COPY package*.json ./
 RUN yarn install
 
-COPY vouch_test_chatroom_fe .
-EXPOSE 5173
+COPY . .
 
-CMD ["yarn", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
+RUN yarn build
