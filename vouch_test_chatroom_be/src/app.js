@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const io = socketio(server, 
   {
     cors: {
-      origin: '*', // Use wildcard only for development or it will get CORS error
+      // origin: '*', // Use wildcard only for development or it will get CORS error
       methods: ['GET', 'POST'],
     },
 });
@@ -20,7 +20,7 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://mongo:27017/chatapp');
+mongoose.connect(process.env.MONGO_URL);
 
 const ChatRoom = mongoose.model('ChatRoom', ChatRoomSchema);
 
