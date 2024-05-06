@@ -10,4 +10,4 @@ COPY . .
 RUN yarn build
 
 FROM nginx:alpine
-COPY dist /usr/share/nginx/html
+COPY /app/dist /usr/share/nginx/html
