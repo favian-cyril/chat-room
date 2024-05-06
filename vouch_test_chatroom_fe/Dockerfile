@@ -8,3 +8,6 @@ RUN yarn install
 COPY . .
 
 RUN yarn build
+
+FROM nginx:alpine
+COPY dist /usr/share/nginx/html
