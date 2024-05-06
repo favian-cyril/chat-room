@@ -7,6 +7,8 @@ RUN yarn install
 
 COPY . .
 
+ARG VITE_BACKEND_URL
+
 RUN yarn build
 
 FROM nginx:alpine
